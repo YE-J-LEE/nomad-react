@@ -1,0 +1,62 @@
+ git 시작법
+
+git init
+github.com/new 들어가서 repo 만들고 그 url .git붙은거말고 복사해서
+git remote add origin (url)
+git add .
+git commit -m "message"
+git push origin master
+
+props 넘겨줄 때  props.fav <=> {fav}
+props로 객체들 넘겨줄 때 배열을 쓴다면 음 key={dish.id}와 같이 키값을 넘겨줘야한다
+설령 쓰지 않는더라도 리액트 내부적으로 필요하기 때문이다. 이렇게 안하면 로컬호스트에서 열은 콘솔창에서 키값에러가 난다.
+
+Food.propTypes = {
+  fav: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired
+};
+
+함수 호출할 때 this.add() 는 즉시 나타나지만 this.add는 클릭할 때만 나타남 onClick 쓸 때 ㅇㅇ
+
+add = () => {
+    this.setState({
+      count: this.state.count + 1
+    });
+  };
+보다시피 setState의 안에 있는 것은 state다.
+정확히 setState를 쓰는 이유는 setState를 써야 render함수가 재호출되기 때문이다 그래서 다시 그려줄 수 있으니깐 ㅇㅇ
+
+ add = () => {
+    this.setState(current => ({
+      count: current.count + 1
+    }));
+  };
+
+  minus = () => {
+    this.setState({
+      count: this.state.count - 1
+    });
+  };
+current로 쓰는 게 더 좋은 방법이다.
+
+음 componentdidmount 이거 약간 첨에 알리미같이 뜨는거에 쓰는건가 팝업창???
+shouldcomponentupdate 이건 컴포넌트 업데이트할지말지 결정하는거
+componentdidupdate 이건 렌더 하고나서 업데이트 됐다고 알려주는?
+다른페이지넘어갈때 쓰는ㄴ게 componentwillunmount
+
+const { isLoading } = this.state; 이렇게 render에서 return전에 한번 선언해주면
+return 내부에서 state 사용할 때 this.state라고 안해도 직접 접근할 수 있어ㅡㅁ
+
+console.log(movies.data.data.movies); 이런식으로 접근하기 싫다먄
+애초에 axios로 받을떄 
+const{ data: {data: {movies}}}로 받으면 됨
+
+map을 사용할 때 마땅한 키값을 찾을 수 없다면 map의 두번째 파라미터로 존재하는 index를 사용하자
+
+gh-pages : github에 웹페이지 올릴 수 있게 해줌
+배포법
+1. yarn add gh-pages
+2. package.json에 "homepage": "https://~~~~~" 추가
+3. 이어서 scripts부분에 deploy랑 predeploy생성
+4. npm run build
